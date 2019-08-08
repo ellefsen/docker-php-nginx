@@ -1,0 +1,12 @@
+steps:
+  # build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/aeon-as/docker-php-nginx', '.']
+  # push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/aeon-as/docker-php-nginx']
+  # Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'docker-php-nginx', '--image', 'gcr.io/aeon-as/docker-php-nginx', '--region', 'europe-west1', '--allow-unauthenticated']
+images:
+- gcr.io/aeon-as/docker-php-nginx
