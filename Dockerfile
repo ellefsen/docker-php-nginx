@@ -27,7 +27,7 @@ RUN chown -R nobody.nobody /run && \
   chown -R nobody.nobody /var/log/nginx && \
   chown -R nobody.nobody $HOME/.composer
 
-WORKDIR /var/www
+# WORKDIR /var/www
 
 # Setup document root
 # RUN mkdir -p /var/www/html
@@ -35,15 +35,16 @@ WORKDIR /var/www
 # Make the document root a volume
 VOLUME /var/www/html
 
-# Switch to use a non-root user from here on
-USER nobody
-
 # Add application
 WORKDIR /var/www/html
-# COPY --chown=nobody src/ /var/www/html/
-RUN composer create-project --prefer-dist laravel/laravel html
 
+RUN composer create-project --prefer-dist laravel/laravel /var/www/html
 RUN php artisan view:cache
+
+# COPY --chown=nobody src/ /var/www/html/
+
+# Switch to use a non-root user from here on
+USER nobody
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
