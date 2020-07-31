@@ -1,0 +1,13 @@
+name: docker-php-nginx
+region: ams3
+services:
+  - dockerfile_path: Dockerfile
+    github:
+      branch: master
+      deploy_on_push: true
+      repo: ellefsen/docker-php-nginx
+    instance_count: 1
+    instance_size_slug: professional-xs
+    name: web
+    routes:
+    - path: /
