@@ -43,6 +43,8 @@ WORKDIR /var/www/html
 # COPY --chown=nobody src/ /var/www/html/
 RUN composer create-project --prefer-dist laravel/laravel html
 
+RUN php artisan view:cache
+
 # Expose the port nginx is reachable on
 EXPOSE 8080
 
