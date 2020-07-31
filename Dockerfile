@@ -1,5 +1,5 @@
-FROM alpine:3.10
-LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
+FROM alpine:3.12
+LABEL Maintainer="Kim Ellefsen <kim@ellefsen.me>" \
       Description="Lightweight container with Nginx 1.16 & PHP-FPM 7.3 based on Alpine Linux."
 
 # Install packages
@@ -23,7 +23,7 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /run && \
   chown -R nobody.nobody /var/lib/nginx && \
-  chown -R nobody.nobody /var/tmp/nginx && \
+  # chown -R nobody.nobody /var/tmp/nginx && \
   chown -R nobody.nobody /var/log/nginx && \
   chown -R nobody.nobody $HOME/.composer
 
