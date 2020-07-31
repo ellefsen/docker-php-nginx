@@ -4,8 +4,8 @@ LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
 
 # Install packages
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
-    php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype php7-session \
-    php7-mbstring php7-gd nginx supervisor ffmpeg curl
+    php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter php7-fileinfo php7-tokenizer php7-ctype php7-session \
+    php7-mbstring php7-gd nginx supervisor curl
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && mkdir /run/php
@@ -36,12 +36,19 @@ RUN chown -R nobody.nobody /run && \
 VOLUME /var/www/html
 
 # Add application
+WORKDIR /var/www
+
+COPY --chown=nobody src/ /var/www/html
+
 WORKDIR /var/www/html
 
-RUN composer create-project --prefer-dist laravel/laravel /var/www/html
+RUN composer install
+
+RUN echo $(ls /var/www/html)
+
 RUN php artisan view:cache
 
-# COPY --chown=nobody src/ /var/www/html/
+RUN chown -R nobody.nobody /var/www
 
 # Switch to use a non-root user from here on
 USER nobody
