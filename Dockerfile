@@ -33,7 +33,7 @@ RUN chown -R nobody.nobody /run && \
 # RUN mkdir -p /var/www/html
 
 # Make the document root a volume
-VOLUME /var/www/html
+# VOLUME /var/www/html
 
 # Add application
 WORKDIR /var/www
