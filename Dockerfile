@@ -10,7 +10,7 @@ RUN apk --update add ca-certificates && \
 # Install packages
 RUN apk --update --no-cache add php php-fpm php-mysqli php-json php-openssl php-curl \
     php-zlib php-xml php-phar php-intl php-dom php-xmlreader php7-xmlwriter php-fileinfo php-tokenizer php-ctype php-session \
-    php-mbstring php-gd php-redis nginx supervisor curl
+    php-mbstring php-gd php-redis php-opcache nginx supervisor curl
 
 RUN ln -s /usr/bin/php7 /usr/bin/php
 
