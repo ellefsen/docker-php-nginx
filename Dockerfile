@@ -1,11 +1,18 @@
-FROM alpine:3.12
+FROM alpine:3.11
 LABEL Maintainer="Kim Ellefsen <kim@ellefsen.me>" \
       Description="Lightweight container with Nginx 1.16 & PHP-FPM 7.3 based on Alpine Linux."
 
+ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
+
+RUN apk --update add ca-certificates && \
+    echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
+
 # Install packages
-RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
-    php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter php7-fileinfo php7-tokenizer php7-ctype php7-session \
-    php7-mbstring php7-gd nginx supervisor curl
+RUN apk --update --no-cache add php php-fpm php-mysqli php-json php-openssl php-curl \
+    php-zlib php-xml php-phar php-intl php-dom php-xmlreader php7-xmlwriter php-fileinfo php-tokenizer php-ctype php-session \
+    php-mbstring php-gd php-redis nginx supervisor curl
+
+RUN ln -s /usr/bin/php7 /usr/bin/php
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && mkdir /run/php
