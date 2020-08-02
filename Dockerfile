@@ -10,7 +10,7 @@ RUN apk --update add ca-certificates && \
 # Install packages
 RUN apk --update --no-cache add php php-fpm php-mysqli php-json php-openssl php-curl \
     php-zlib php-xml php-phar php-intl php-dom php-xmlreader php7-xmlwriter php-fileinfo php-tokenizer php-ctype php-session \
-    php-mbstring php-gd php-redis php-opcache nginx supervisor curl
+    php-mbstring php-gd php-redis php-opcache php-pdo_mysql nginx supervisor curl
 
 RUN ln -s /usr/bin/php7 /usr/bin/php
 
@@ -30,17 +30,8 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /run && \
   chown -R nobody.nobody /var/lib/nginx && \
-  # chown -R nobody.nobody /var/tmp/nginx && \
   chown -R nobody.nobody /var/log/nginx && \
   chown -R nobody.nobody $HOME/.composer
-
-# WORKDIR /var/www
-
-# Setup document root
-# RUN mkdir -p /var/www/html
-
-# Make the document root a volume
-# VOLUME /var/www/html
 
 # Add application
 WORKDIR /var/www
@@ -49,11 +40,8 @@ COPY --chown=nobody src/ /var/www/html
 
 WORKDIR /var/www/html
 
-RUN composer install
-
-RUN echo $(ls /var/www/html)
-
-RUN php artisan view:cache
+RUN composer install && \
+    php artisan view:cache
 
 COPY config/start.sh /usr/local/bin/start
 
@@ -68,10 +56,7 @@ USER nobody
 EXPOSE 8080
 
 # Let supervisord start nginx & php-fpm
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 CMD ["/usr/local/bin/start"]
-
-# Todo: https://laravel-news.com/laravel-scheduler-queue-docker
 
 # Configure a healthcheck to validate that everything is up&running
 # HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
