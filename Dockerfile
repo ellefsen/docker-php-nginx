@@ -55,7 +55,11 @@ RUN echo $(ls /var/www/html)
 
 RUN php artisan view:cache
 
-RUN chown -R nobody.nobody /var/www
+COPY config/start.sh /usr/local/bin/start
+
+RUN chown -R nobody.nobody /var/www && \
+    chown nobody.nobody /usr/local/bin/start && \
+    chmod u+x /usr/local/bin/start
 
 # Switch to use a non-root user from here on
 USER nobody
@@ -64,7 +68,8 @@ USER nobody
 EXPOSE 8080
 
 # Let supervisord start nginx & php-fpm
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/local/bin/start"]
 
 # Todo: https://laravel-news.com/laravel-scheduler-queue-docker
 
