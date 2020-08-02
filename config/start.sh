@@ -5,6 +5,8 @@ set -e
 role=${CONTAINER_ROLE:-app}
 env=${APP_ENV:-production}
 
+php /var/www/html/artisan migrate --force
+
 if [ "$role" = "app" ]; then
 
     echo "Running the app..."
