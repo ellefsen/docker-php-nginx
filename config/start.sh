@@ -7,6 +7,8 @@ env=${APP_ENV:-production}
 
 if [ "$role" = "app" ]; then
 
+    echo "Running the app..."
+    exec php /var/www/html/artisan migrate --force
     exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 
 elif [ "$role" = "queue" ]; then

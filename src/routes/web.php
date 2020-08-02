@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/queue', function () {
+    $x = 0;
+    while ($x <= 100) {
+        dispatch(function () use ($x) {
+            logger('Queue logged '.$x);
+        });
+
+        ++$x;
+    }
+});
