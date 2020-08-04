@@ -7,6 +7,8 @@ env=${APP_ENV:-production}
 
 php /var/www/html/artisan migrate --force
 
+sed -i "s/8080/$PORT/g" /etc/nginx/nginx.conf
+
 if [ "$role" = "app" ]; then
 
     echo "Running the app..."
