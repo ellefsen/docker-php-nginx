@@ -5,7 +5,7 @@ set -e
 role=${CONTAINER_ROLE:-app}
 env=${APP_ENV:-production}
 
-php /var/www/html/artisan migrate --force
+# php /var/www/html/artisan migrate --force
 
 sed -i "s/8080/$PORT/g" /etc/nginx/nginx.conf
 
