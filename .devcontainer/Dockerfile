@@ -43,15 +43,7 @@ RUN chmod +x /usr/bin/start-container
 # RUN groupadd -g 1000 www-data
 # RUN useradd -u 1000 -ms /bin/bash -g www-data www-data
 
-COPY . /var/www/html
 WORKDIR /var/www/html
-
-RUN composer install
-RUN php artisan view:cache
-# RUN php artisan route:cache
-
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
 
 RUN chown -R www-data:www-data /var/www
 
