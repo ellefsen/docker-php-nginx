@@ -35,13 +35,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 ADD docker/default /etc/nginx/sites-available/default
 ADD docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD docker/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
-ADD docker/start-container.sh /usr/bin/start-container
-
-RUN chmod +x /usr/bin/start-container
-
-# Add user for laravel application
-# RUN groupadd -g 1000 www-data
-# RUN useradd -u 1000 -ms /bin/bash -g www-data www-data
 
 WORKDIR /var/www/html
 
