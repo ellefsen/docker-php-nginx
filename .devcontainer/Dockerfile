@@ -52,4 +52,4 @@ RUN chown -R www-data:www-data /var/www
 
 EXPOSE 8080
 
-ENTRYPOINT ["start-container"]
+CMD ["/usr/bin/supervisord"]
