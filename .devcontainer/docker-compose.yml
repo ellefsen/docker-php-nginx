@@ -7,12 +7,21 @@ services:
     ports:
     - "80:80"
     volumes:
-    - ./:/var/www/html
+    - ../src:/var/www/html
+    networks:
+    - appnet
   php:
     build:
       context: ./support
       dockerfile: Dockerfile.php73
     volumes:
-    - ./:/var/www/html
+    - ../src:/var/www/html
+    networks:
+    - appnet
   redis:
     image: redis:alpine
+    networks:
+    - appnet
+networks:
+  appnet:
+    driver: "bridge"
