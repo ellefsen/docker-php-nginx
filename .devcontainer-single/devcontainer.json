@@ -1,11 +1,15 @@
 {
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "nginx",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder}/src,target=/var/www/html,type=bind,consistency=cached"
+    ],
+    "workspaceFolder": "/var/www/html",
     "forwardPorts": [
-        80
+        8080
     ],
     "overrideCommand": false,
-    "workspaceFolder": "/var/www/html",
 
     // Install ESLint and Peacock extensions
     "extensions": [
