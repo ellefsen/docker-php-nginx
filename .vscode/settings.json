@@ -1,0 +1,53 @@
+{
+    "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+    "terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "scss.implicitlyLabel": "",
+    "editor.tabSize": 4,
+    "workbench.colorTheme": "Field Lights",
+    "editor.lineHeight": 24,
+    "workbench.statusBar.visible": false,
+    "explorer.openEditors.visible": 0,
+    "php.suggest.basic": false,
+    "window.zoomLevel": 0,
+    "phpcs.executablePath": "/usr/local/bin/php-cs-fixer",
+    "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+    "php-cs-fixer.onsave": true,
+    "php-cs-fixer.config": "/root/dotfiles/.php_cs",
+    "eslint.validate": [
+        { "language": "vue", "autoFix": true },
+        { "language": "html", "autoFix": true },
+        { "language": "javascript", "autoFix": true },
+    ],
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "vue-html": "html"
+    },
+    "javascript.format.enable": false,
+    "jshint.options": {
+        "esversion": 6,
+        "asi": true
+    },
+    "importCost.typescriptExtensions": [
+        "\\.tsx?$",
+        "\\.vue$"
+    ],
+    "importCost.javascriptExtensions": [
+        "\\.jsx?$",
+        "\\.vue$"
+    ],
+    "php-cs-fixer.lastDownload": 1575896419121,
+    "terminal.integrated.shell.osx": "zsh",
+    "eslint.autoFixOnSave": true,
+    "workbench.fontAliasing": "antialiased",
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer"
+    },
+    "breadcrumbs.enabled": false,
+    "workbench.tree.indent": 12,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "php-cs-fixer.exclude": [
+
+    ]
+}
