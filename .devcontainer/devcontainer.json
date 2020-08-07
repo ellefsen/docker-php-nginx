@@ -9,6 +9,7 @@
     "forwardPorts": [
         8080
     ],
+    "postStartCommand": "/usr/bin/supervisord",
 
     // Install ESLint and Peacock extensions
     "extensions": [
