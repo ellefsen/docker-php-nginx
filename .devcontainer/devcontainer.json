@@ -2,7 +2,9 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    "workspaceMount": "source=${localWorkspaceFolder},target=/var/www/html,type=bind,consistency=cached",
+    "mounts": [
+        "source=${localWorkspaceFolder}/src,target=/var/www/html,type=bind,consistency=cached"
+    ],
     "workspaceFolder": "/var/www/html",
     "forwardPorts": [
         8080
